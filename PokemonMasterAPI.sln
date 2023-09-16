@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A28D9A8C-E4ED-45D8-B41D-51C948B0B655}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{06F50DD3-EF18-480E-B7B3-6FA647A7656D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{26F20BE9-B5F9-4A41-935E-ABC0F5114F5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4AB76C9E-7D50-45F0-94E0-995A2F6791F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A9A69ECF-8B22-48E5-B599-9C81BFA092F9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonMasterAPI", "PokemonMasterAPI\PokemonMasterAPI.csproj", "{B1BFF927-1B0B-4EB4-82C6-020D17920B4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonMasterAPI.Domain", "PokemonMasterAPI.Domain\PokemonMasterAPI.Domain.csproj", "{40662F4D-E5F0-4DF1-8933-C13380CCEE19}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonMasterAPI.Application", "PokemonMasterAPI.Application\PokemonMasterAPI.Application.csproj", "{5E1534A6-7BA9-45AB-87D9-D875A3E55B3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonMasterAPI.Infrastructure", "PokemonMasterAPI.Infrastructure\PokemonMasterAPI.Infrastructure.csproj", "{F6E0F4AF-54EA-4A07-B7FE-42E988086B92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1BFF927-1B0B-4EB4-82C6-020D17920B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1BFF927-1B0B-4EB4-82C6-020D17920B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1BFF927-1B0B-4EB4-82C6-020D17920B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1BFF927-1B0B-4EB4-82C6-020D17920B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40662F4D-E5F0-4DF1-8933-C13380CCEE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40662F4D-E5F0-4DF1-8933-C13380CCEE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40662F4D-E5F0-4DF1-8933-C13380CCEE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40662F4D-E5F0-4DF1-8933-C13380CCEE19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E1534A6-7BA9-45AB-87D9-D875A3E55B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E1534A6-7BA9-45AB-87D9-D875A3E55B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E1534A6-7BA9-45AB-87D9-D875A3E55B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E1534A6-7BA9-45AB-87D9-D875A3E55B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6E0F4AF-54EA-4A07-B7FE-42E988086B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6E0F4AF-54EA-4A07-B7FE-42E988086B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6E0F4AF-54EA-4A07-B7FE-42E988086B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6E0F4AF-54EA-4A07-B7FE-42E988086B92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B1BFF927-1B0B-4EB4-82C6-020D17920B4C} = {A9A69ECF-8B22-48E5-B599-9C81BFA092F9}
+		{40662F4D-E5F0-4DF1-8933-C13380CCEE19} = {A28D9A8C-E4ED-45D8-B41D-51C948B0B655}
+		{5E1534A6-7BA9-45AB-87D9-D875A3E55B3E} = {06F50DD3-EF18-480E-B7B3-6FA647A7656D}
+		{F6E0F4AF-54EA-4A07-B7FE-42E988086B92} = {26F20BE9-B5F9-4A41-935E-ABC0F5114F5C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F26E933F-7C5A-4DF8-B6AB-06E98F1F95C9}
+	EndGlobalSection
+EndGlobal
