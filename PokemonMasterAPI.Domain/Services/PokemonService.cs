@@ -1,7 +1,5 @@
 using PokemonMasterAPI.Domain.Entities;
 using PokemonMasterAPI.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
 
 namespace PokemonMasterAPI.Domain.Services
 {

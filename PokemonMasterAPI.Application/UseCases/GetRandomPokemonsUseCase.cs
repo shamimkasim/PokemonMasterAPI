@@ -6,38 +6,20 @@ namespace PokemonMasterAPI.Application.UseCases
     public class GetRandomPokemonsUseCase
     {
         private readonly IPokemonRepository _pokemonRepository;
-        private readonly IPokeApiService _pokeApiService;
 
-        public GetRandomPokemonsUseCase(IPokemonRepository pokemonRepository, IPokeApiService pokeApiService)
+        public GetRandomPokemonsUseCase(IPokemonRepository pokemonRepository)
         {
-            _pokemonRepository = pokemonRepository;
-            _pokeApiService = pokeApiService;
+            _pokemonRepository = pokemonRepository ?? throw new ArgumentNullException(nameof(pokemonRepository));
         }
-
-        public async Task<List<EnhancedPokemon>> GetRandomPokemons(int count)
+        public List<Pokemon> GetRandomPokemons(int count)
         {
-            var randomPokemons = _pokemonRepository.GetRandomPokemons(count);
-            var enhancedPokemons = new List<EnhancedPokemon>();
-
-            foreach (var pokemon in randomPokemons)
+            if (count <= 0)
             {
-                var evolutions = await _pokeApiService.GetPokemonEvolutions(pokemon.Name);
-                var spriteBase64 = await _pokeApiService.GetPokemonSpriteBase64(pokemon.Id);
-
-                var enhancedPokemon = new EnhancedPokemon
-                {
-                    Id = pokemon.Id,
-                    Name = pokemon.Name,
-                    Height = pokemon.Height,
-                    Weight = pokemon.Weight,
-                    Evolutions = evolutions,
-                    SpriteBase64 = spriteBase64
-                };
-
-                enhancedPokemons.Add(enhancedPokemon);
+                throw new ArgumentException("Count must be a positive integer.", nameof(count));
             }
 
-            return enhancedPokemons;
+            return _pokemonRepository.GetRandomPokemons(count);
         }
+        
     }
 }

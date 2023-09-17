@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PokemonMasterAPI.Domain.Entities;
 using PokemonMasterAPI.Domain.Interfaces;
@@ -46,9 +43,15 @@ namespace PokemonMasterAPI.Infrastructure.Data.Repositories
 
         public Trainer GetTrainerById(int trainerId)
         {
-            return _dbContext.Trainers.FirstOrDefault(t => t.Id == trainerId);
-        }
+            var trainer = _dbContext.Trainers.FirstOrDefault(t => t.Id == trainerId);
 
+            if (trainer == null)
+            {
+                throw new Exception($"Trainer with ID {trainerId} not found.");
+            }
+
+            return trainer;
+        }
         public void CapturePokemon(int trainerId, int pokemonId)
         {
             var trainer = GetTrainerById(trainerId);

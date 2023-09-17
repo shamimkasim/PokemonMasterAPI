@@ -41,6 +41,26 @@ namespace PokemonMasterAPI.Infrastructure.Migrations
                     b.ToTable("Captures");
                 });
 
+            modelBuilder.Entity("PokemonMasterAPI.Domain.Entities.Evolution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("PokemonId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
+
+                    b.ToTable("Evolutions");
+                });
+
             modelBuilder.Entity("PokemonMasterAPI.Domain.Entities.Pokemon", b =>
                 {
                     b.Property<int>("Id")
@@ -108,6 +128,13 @@ namespace PokemonMasterAPI.Infrastructure.Migrations
                     b.Navigation("Trainer");
                 });
 
+            modelBuilder.Entity("PokemonMasterAPI.Domain.Entities.Evolution", b =>
+                {
+                    b.HasOne("PokemonMasterAPI.Domain.Entities.Pokemon", null)
+                        .WithMany("Evolutions")
+                        .HasForeignKey("PokemonId");
+                });
+
             modelBuilder.Entity("PokemonMasterAPI.Domain.Entities.Pokemon", b =>
                 {
                     b.HasOne("PokemonMasterAPI.Domain.Entities.Trainer", null)
@@ -118,6 +145,8 @@ namespace PokemonMasterAPI.Infrastructure.Migrations
             modelBuilder.Entity("PokemonMasterAPI.Domain.Entities.Pokemon", b =>
                 {
                     b.Navigation("Captures");
+
+                    b.Navigation("Evolutions");
                 });
 
             modelBuilder.Entity("PokemonMasterAPI.Domain.Entities.Trainer", b =>

@@ -11,7 +11,6 @@ namespace PokemonMasterAPI.Application.UseCases
         {
             _pokemonService = pokemonService;
         }
-
         public Pokemon GetPokemon(int id)
         {           
             return _pokemonService.GetPokemonById(id);

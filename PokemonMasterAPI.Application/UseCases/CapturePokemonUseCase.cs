@@ -1,20 +1,25 @@
+using PokemonMasterAPI.Application.DTOs;
 using PokemonMasterAPI.Domain.Entities;
 using PokemonMasterAPI.Domain.Interfaces;
 using PokemonMasterAPI.Infrastructure.Data;
+
 
 namespace PokemonMasterAPI.Application.UseCases
 {
     public class CapturePokemonUseCase
     {
-        private readonly ITrainerRepository _trainerRepository;
+        private readonly ITrainerRepository _trainerRepository; 
         private readonly IPokemonRepository _pokemonRepository;
         private readonly PokemonDbContext _context;
 
-        public CapturePokemonUseCase(IPokemonRepository pokemonRepository, PokemonDbContext context)
+        public CapturePokemonUseCase(ITrainerRepository trainerRepository, IPokemonRepository pokemonRepository, PokemonDbContext context) // Add trainerRepository parameter
         {
+            _trainerRepository = trainerRepository; 
             _pokemonRepository = pokemonRepository;
             _context = context;
         }
+
+       
 
         public void CapturePokemon(int trainerId, int pokemonId)
         {
@@ -23,11 +28,6 @@ namespace PokemonMasterAPI.Application.UseCases
 
             if (trainer != null && pokemon != null)
             {
-                if (trainer.Captures.Exists(c => c.PokemonId == pokemonId))
-                {
-                    throw new Exception("This Pokémon is already captured by the trainer.");
-                }
-
                 var capture = new Capture
                 {
                     TrainerId = trainerId,
@@ -45,5 +45,32 @@ namespace PokemonMasterAPI.Application.UseCases
                 throw new Exception("Invalid trainer ID or Pokémon ID.");
             }
         }
+
+        public void CapturePokemon(PokemonDto pokemonDto)
+        {
+            var trainer = _trainerRepository.GetTrainerById(pokemonDto.TrainerId);
+            var pokemon = _pokemonRepository.GetPokemonById(pokemonDto.PokemonId);
+
+            if (trainer != null && pokemon != null)
+            {                
+
+                var capture = new Capture
+                {
+                    TrainerId = pokemonDto.TrainerId,
+                    PokemonId = pokemonDto.PokemonId,
+                    CaptureDate = DateTime.Now
+
+                };
+
+                _context.Captures.Add(capture);
+                _context.SaveChanges();
+
+            }
+            else
+            {
+                throw new Exception("Invalid trainer ID or Pokémon ID.");
+            }
+        }
     }
 }
+

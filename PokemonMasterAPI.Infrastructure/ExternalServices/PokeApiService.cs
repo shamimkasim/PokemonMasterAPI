@@ -59,27 +59,32 @@ namespace PokemonMasterAPI.Infrastructure.ExternalServices
             PokemonInfo pokemonInfo = JsonConvert.DeserializeObject<PokemonInfo>(responseBody);
 
             return pokemonInfo;
-        }
-        public async Task<Pokemon> GetPokemon(int id)
+        }        
+        public async Task<List<PokemonInfo>> GetPokemon(int id)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"pokemon/{id}");
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
-            
-            Pokemon pokemon = JsonConvert.DeserializeObject<Pokemon>(responseBody);
-            return pokemon;
-        }
-        public async Task<Pokemon> GetPokemonLimit(int limit)
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync($"pokemon/{limit}");
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            
-            Pokemon pokemon = JsonConvert.DeserializeObject<Pokemon>(responseBody);
 
-            return pokemon;
+            dynamic pokemonListData = JsonConvert.DeserializeObject(responseBody);
+
+            List<PokemonInfo> pokemonList = new List<PokemonInfo>();
+
+            if (pokemonListData != null && pokemonListData.results != null)
+            {
+                foreach (var result in pokemonListData.results)
+                {
+                    pokemonList.Add(new PokemonInfo
+                    {
+                        Name = result.name,
+                        Url = result.url
+                    });
+                }
+            }
+
+            return pokemonList;
         }
-        
+
         public async Task<List<string>> GetPokemonEvolutions(string pokemonName)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"pokemon-species/{pokemonName}");
@@ -142,28 +147,30 @@ namespace PokemonMasterAPI.Infrastructure.ExternalServices
 
             return pokemonInfo;
         }
-        public async Task<List<PokemonInfo>> GetPokemonList(int offset, int limit)
+        public async Task<List<Pokemon>> GetRandomPokemons(int limit)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"pokemon?offset={offset}&limit={limit}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"pokemon?{limit}");
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
 
-            dynamic pokemonListData = JsonConvert.DeserializeObject(responseBody);
+            dynamic pokemonData = JsonConvert.DeserializeObject(responseBody);
+            JArray results = pokemonData.results;
 
-            List<PokemonInfo> pokemonList = new List<PokemonInfo>();
+            List<Pokemon> allPokemons = new List<Pokemon>();
 
-            foreach (var result in pokemonListData.results)
+            foreach (var result in results)
             {
-                pokemonList.Add(new PokemonInfo
-                {
-                    Name = result.name,
-                    Url = result.url
-                });
+                string url = result["url"].ToString();
+                HttpResponseMessage pokemonResponse = await _httpClient.GetAsync(url);
+                pokemonResponse.EnsureSuccessStatusCode();
+                string pokemonResponseBody = await pokemonResponse.Content.ReadAsStringAsync();
+                Pokemon pokemon = JsonConvert.DeserializeObject<Pokemon>(pokemonResponseBody);
+                allPokemons.Add(pokemon);
             }
+            
+            List<Pokemon> randomPokemons = allPokemons.OrderBy(p => Guid.NewGuid()).Take(limit).ToList();
 
-            return pokemonList;
+            return randomPokemons;
         }
-
-
     }
 }

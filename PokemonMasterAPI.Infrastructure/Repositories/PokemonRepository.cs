@@ -21,12 +21,15 @@ namespace PokemonMasterAPI.Infrastructure.Data.Repositories
 
             return pokemon;
         }
-
         public List<Pokemon> GetRandomPokemons(int count)
         {
-            return _dbContext.Pokemons.ToList();
+            if (count <= 0)
+            {
+                throw new ArgumentException("Count must be a positive integer.", nameof(count));
+            }
 
-        }       
+            return _dbContext.Pokemons.OrderBy(p => Guid.NewGuid()).Take(count).ToList();
+        }
 
     }
 }

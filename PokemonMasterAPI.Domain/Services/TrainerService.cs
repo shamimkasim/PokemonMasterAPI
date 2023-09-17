@@ -26,10 +26,16 @@ namespace PokemonMasterAPI.Domain.Services
 
             if (string.IsNullOrEmpty(cpf))
             {
-                throw new ArgumentException("cpf  number cannot be null or empty.", nameof(cpf));
+                throw new ArgumentException("CPF number cannot be null or empty.", nameof(cpf));
             }
 
             _trainerRepository.RegisterTrainer(name, age, cpf);
+        }
+
+        public Trainer GetTrainerById(int id)
+        {
+            var trainer = _trainerRepository.GetTrainerById(id);
+            return trainer;
         }
 
         public List<Pokemon> GetCapturedPokemons(int trainerId)
@@ -41,5 +47,7 @@ namespace PokemonMasterAPI.Domain.Services
 
             return _trainerRepository.GetCapturedPokemons(trainerId);
         }
+
+      
     }
 }

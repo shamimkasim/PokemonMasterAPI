@@ -7,7 +7,9 @@ namespace PokemonMasterAPI.Infrastructure.Data
     {
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<Pokemon> Pokemons { get; set; }
-        public DbSet<Capture> Captures { get; set; }       
+        public DbSet<Capture> Captures { get; set; }
+
+        public DbSet<Evolution> Evolutions { get; set; }
 
         public PokemonDbContext(DbContextOptions<PokemonDbContext> options) : base(options)
         {

@@ -6,5 +6,7 @@ namespace PokemonMasterAPI.Domain.Interfaces
     {
         void RegisterTrainer(string name, int age, string cpf);
         List<Pokemon> GetCapturedPokemons(int trainerId);
+       
+
     }
 }

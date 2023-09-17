@@ -11,11 +11,10 @@ namespace PokemonMasterAPI.Application.UseCases
         {
             _trainerService = trainerService;
         }
-
         public List<Pokemon> GetCapturedPokemons(int trainerId)
-        {           
-            List<Pokemon> capturedPokemons = new List<Pokemon>();
-            return capturedPokemons;
+        {            
+            return _trainerService.GetCapturedPokemons(trainerId);
         }
+        
     }
 }

@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="PokemonMasterAPI.Application">
+      <HintPath>..\PokemonMasterAPI.Application\bin\Debug\net6.0\PokemonMasterAPI.Application.dll</HintPath>
+    </Reference>
+    <Reference Include="PokemonMasterAPI.Infrastructure">
+      <HintPath>..\PokemonMasterAPI.Infrastructure\bin\Debug\net6.0\PokemonMasterAPI.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

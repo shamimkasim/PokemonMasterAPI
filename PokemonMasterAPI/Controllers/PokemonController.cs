@@ -29,27 +29,41 @@ namespace PokemonMasterAPI.Presentation.Controllers
             _listCapturedPokemonsUseCase = listCapturedPokemonsUseCase;
             _pokeApiService = pokeApiService;
         }
-
-      
-        [HttpGet("GetRandomPokemons/{count}")]
-        public IActionResult GetRandomPokemons(int count)
-        {
-            try
-            {
-                var enhancedPokemons = _getRandomPokemonsUseCase.GetRandomPokemons(count);
-                return Ok(enhancedPokemons);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Failed to retrieve random Pokémon: {ex.Message}");
-            }
-        }
-
-
+        
         [HttpGet("GetPokemon")]
-        public async Task<Pokemon> GetPokemon(int id)
+        public IActionResult GetPokemon(int offset, int limit)
         {
-            return await _pokeApiService.GetPokemon(id);
+
+            var response = new
+            {
+                count = 1281,
+                next = $"https://pokeapi.co/api/v2/pokemon?offset={offset + limit}&limit={limit}",
+                previous = offset - limit >= 0 ? $"https://pokeapi.co/api/v2/pokemon?offset={offset - limit}&limit={limit}" : null,
+                results = new[]
+                {
+            new
+            {
+                name = "bulbasaur",
+                url = $"https://pokeapi.co/api/v2/pokemon/{limit}/"
+            },
+
+        }
+            };
+
+            return Ok(response);
+        }
+        [HttpGet("GetRandomPokemonsList")]
+        public async Task<IActionResult> GetRandomPokemonsList(int limit)
+        {
+            List<Pokemon> pokemons = await _pokeApiService.GetRandomPokemons(limit);
+
+            List<PokemonResultDto> pokemonResults = pokemons.Select(p => new PokemonResultDto
+            {
+                Name = p.Name,
+                Url = $"https://pokeapi.co/api/v2/pokemon/{p.Id}/"
+            }).ToList();
+            return Ok(pokemonResults);
+
         }
 
         [HttpPost("CapturePokemon")]
@@ -72,27 +86,10 @@ namespace PokemonMasterAPI.Presentation.Controllers
             return _listCapturedPokemonsUseCase.GetCapturedPokemons(trainerId);
         }
 
-        
-
-        [HttpGet("GetRandomPokemons")]
-        public IActionResult GetRandomPokemons([FromQuery] int? count)
+        [HttpGet("GetPokemonList")]
+        public async Task<IActionResult> GetPokemonList(int limit)
         {
-            try
-            {
-                var enhancedPokemons = _getRandomPokemonsUseCase.GetRandomPokemons(count ?? 5);
-                return Ok(enhancedPokemons);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Failed to retrieve random Pokémon: {ex.Message}");
-            }
-        }
-
-       
-        [HttpGet("GetPokemons")]
-        public async  Task <IActionResult> GetPokemons( int limit)
-        {            
-            List<Pokemon> pokemons = await _pokeApiService.GetPokemons( limit);
+            List<Pokemon> pokemons = await _pokeApiService.GetPokemons(limit);
 
             List<PokemonResultDto> pokemonResults = pokemons.Select(p => new PokemonResultDto
             {
@@ -101,29 +98,21 @@ namespace PokemonMasterAPI.Presentation.Controllers
             }).ToList();
             return Ok(pokemonResults);
         }
-        [HttpGet("GetPokemonList")]
-        public IActionResult GetPokemonList(int offset, int limit)
-        {           
 
-            var response = new
+        [HttpPost("SaveSearchedPokemon")]
+        public IActionResult SaveSearchedPokemon([FromBody] PokemonDto pokemonDto)
+        {
+            try
             {
-                count = 1281,
-                next = $"https://pokeapi.co/api/v2/pokemon?offset={offset + limit}&limit={limit}",
-                previous = offset - limit >= 0 ? $"https://pokeapi.co/api/v2/pokemon?offset={offset - limit}&limit={limit}" : null,
-                results = new[]
-                {
-            new
+
+                _capturePokemonUseCase.CapturePokemon(pokemonDto);
+                return Ok("Pokemon saved successfully.");
+            }
+            catch (Exception ex)
             {
-                name = "bulbasaur",
-                url = $"https://pokeapi.co/api/v2/pokemon/{limit}/"
-            },
-           
+                return BadRequest($"Failed to save Pokemon: {ex.Message}");
+            }
         }
-            };
-
-            return Ok(response);
-        }
-
 
     }
 }

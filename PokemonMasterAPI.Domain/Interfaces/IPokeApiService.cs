@@ -8,5 +8,4 @@ namespace PokemonMasterAPI.Domain.Interfaces
         Task<PokemonInfo> GetPokemonInfo(int Id);
         Task<List<string>> GetPokemonEvolutions(string pokemonName);
     }
-
 }

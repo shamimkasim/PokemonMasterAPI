@@ -74,6 +74,25 @@ namespace PokemonMasterAPI.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Evolutions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    PokemonId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Evolutions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Evolutions_Pokemons_PokemonId",
+                        column: x => x.PokemonId,
+                        principalTable: "Pokemons",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Captures_PokemonId",
                 table: "Captures",
@@ -83,6 +102,11 @@ namespace PokemonMasterAPI.Infrastructure.Migrations
                 name: "IX_Captures_TrainerId",
                 table: "Captures",
                 column: "TrainerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Evolutions_PokemonId",
+                table: "Evolutions",
+                column: "PokemonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pokemons_TrainerId",
@@ -95,6 +119,9 @@ namespace PokemonMasterAPI.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Captures");
+
+            migrationBuilder.DropTable(
+                name: "Evolutions");
 
             migrationBuilder.DropTable(
                 name: "Pokemons");
