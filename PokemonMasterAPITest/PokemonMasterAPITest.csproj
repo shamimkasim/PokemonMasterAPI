@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitTests\DomainTests\" />
+    <Folder Include="UnitTests\InfrastructureTests\DataTests\" />
+    <Folder Include="UnitTests\ExternalServicesTests\" />
+    <Folder Include="UnitTests\PresentationTests\ControllersTests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Include="xunit.assert" Version="2.5.1" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PokemonMasterAPI.Application\PokemonMasterAPI.Application.csproj" />
+    <ProjectReference Include="..\PokemonMasterAPI.Infrastructure\PokemonMasterAPI.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

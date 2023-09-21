@@ -1,4 +1,5 @@
 using PokemonMasterAPI.Application.DTOs;
+using PokemonMasterAPI.Application.Interfaces;
 using PokemonMasterAPI.Domain.Entities;
 using PokemonMasterAPI.Domain.Interfaces;
 using PokemonMasterAPI.Infrastructure.Data;
@@ -6,7 +7,7 @@ using PokemonMasterAPI.Infrastructure.Data;
 
 namespace PokemonMasterAPI.Application.UseCases
 {
-    public class CapturePokemonUseCase
+    public class CapturePokemonUseCase: ICapturePokemonUseCase
     {
         private readonly ITrainerRepository _trainerRepository; 
         private readonly IPokemonRepository _pokemonRepository;

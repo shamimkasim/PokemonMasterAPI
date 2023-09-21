@@ -1,8 +1,9 @@
+using PokemonMasterAPI.Application.Interfaces;
 using PokemonMasterAPI.Domain.Services;
 
 namespace PokemonMasterAPI.Application.UseCases
 {
-    public class RegisterTrainerUseCase
+    public class RegisterTrainerUseCase: IRegisterTrainerUseCase
     {
         private readonly TrainerService _trainerService;
 

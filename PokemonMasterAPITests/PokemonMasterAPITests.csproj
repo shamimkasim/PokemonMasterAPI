@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Include="xunit" Version="2.5.1" />
+    <PackageReference Include="xunit.assert" Version="2.5.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.1.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitTests\DomainTests\" />
+    <Folder Include="UnitTests\ExternalServicesTests\" />
+    <Folder Include="UnitTests\InfrastructureTests\DataTests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PokemonMasterAPI.Application\PokemonMasterAPI.Application.csproj" />
+    <ProjectReference Include="..\PokemonMasterAPI.Domain\PokemonMasterAPI.Domain.csproj" />
+    <ProjectReference Include="..\PokemonMasterAPI.Infrastructure\PokemonMasterAPI.Infrastructure.csproj" />
+    <ProjectReference Include="..\PokemonMasterAPI\PokemonMasterAPI.csproj" />
+  </ItemGroup>
+
+</Project>

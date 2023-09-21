@@ -1,9 +1,10 @@
+using PokemonMasterAPI.Application.Interfaces;
 using PokemonMasterAPI.Domain.Entities;
 using PokemonMasterAPI.Domain.Services;
 
 namespace PokemonMasterAPI.Application.UseCases
 {
-    public class ListCapturedPokemonsUseCase
+    public class ListCapturedPokemonsUseCase: IListCapturedPokemonsUseCase
     {
         private readonly TrainerService _trainerService;
 

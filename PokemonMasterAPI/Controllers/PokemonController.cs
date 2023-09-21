@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PokemonMasterAPI.Application.DTOs;
-using PokemonMasterAPI.Application.UseCases;
+using PokemonMasterAPI.Application.Interfaces;
 using PokemonMasterAPI.Domain.Entities;
-using PokemonMasterAPI.Infrastructure.ExternalServices;
+using IPokeApiService = PokemonMasterAPI.Infrastructure.ExternalServices.Interfaces.IPokeApiService;
 
 namespace PokemonMasterAPI.Presentation.Controllers
 {
@@ -10,18 +10,18 @@ namespace PokemonMasterAPI.Presentation.Controllers
     [ApiController]
     public class PokemonController : ControllerBase
     {
-        private readonly GetRandomPokemonsUseCase _getRandomPokemonsUseCase;
-        private readonly GetPokemonUseCase _getPokemonUseCase;
-        private readonly CapturePokemonUseCase _capturePokemonUseCase;
-        private readonly ListCapturedPokemonsUseCase _listCapturedPokemonsUseCase;
-        private readonly PokeApiService _pokeApiService;
+        private readonly IGetRandomPokemonsUseCase _getRandomPokemonsUseCase;
+        private readonly IGetPokemonUseCase _getPokemonUseCase;
+        private readonly ICapturePokemonUseCase _capturePokemonUseCase;
+        private readonly IListCapturedPokemonsUseCase _listCapturedPokemonsUseCase;
+        private readonly IPokeApiService _pokeApiService;
 
         public PokemonController(
-            GetRandomPokemonsUseCase getRandomPokemonsUseCase,
-            GetPokemonUseCase getPokemonUseCase,
-            CapturePokemonUseCase capturePokemonUseCase,
-            ListCapturedPokemonsUseCase listCapturedPokemonsUseCase,
-            PokeApiService pokeApiService)
+            IGetRandomPokemonsUseCase getRandomPokemonsUseCase,
+            IGetPokemonUseCase getPokemonUseCase,
+            ICapturePokemonUseCase capturePokemonUseCase,
+            IListCapturedPokemonsUseCase listCapturedPokemonsUseCase,
+            IPokeApiService pokeApiService)
         {
             _getRandomPokemonsUseCase = getRandomPokemonsUseCase;
             _getPokemonUseCase = getPokemonUseCase;
@@ -104,7 +104,6 @@ namespace PokemonMasterAPI.Presentation.Controllers
         {
             try
             {
-
                 _capturePokemonUseCase.CapturePokemon(pokemonDto);
                 return Ok("Pokemon saved successfully.");
             }

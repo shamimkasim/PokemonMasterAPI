@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PokemonMasterAPI.Domain.Entities;
-using PokemonMasterAPI.Domain.Interfaces;
+using IPokeApiService = PokemonMasterAPI.Infrastructure.ExternalServices.Interfaces.IPokeApiService;
 
 namespace PokemonMasterAPI.Infrastructure.ExternalServices
 {

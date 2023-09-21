@@ -1,9 +1,10 @@
+using PokemonMasterAPI.Application.Interfaces;
 using PokemonMasterAPI.Domain.Entities;
 using PokemonMasterAPI.Domain.Interfaces;
 
 namespace PokemonMasterAPI.Application.UseCases
 {
-    public class GetRandomPokemonsUseCase
+    public class GetRandomPokemonsUseCase: IGetRandomPokemonsUseCase
     {
         private readonly IPokemonRepository _pokemonRepository;
 

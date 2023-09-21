@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using PokemonMasterAPI.Application.Interfaces;
 using PokemonMasterAPI.Application.UseCases;
+using PokemonMasterAPI.Domain.Interfaces;
 using PokemonMasterAPI.Domain.Services;
 
 namespace PokemonMasterAPI.Presentation.Controllers
@@ -9,10 +11,10 @@ namespace PokemonMasterAPI.Presentation.Controllers
     [ApiController]
     public class TrainerController : ControllerBase
     {
-        private readonly RegisterTrainerUseCase _registerTrainerUseCase;
-        private readonly TrainerService _trainerService;
+        private readonly IRegisterTrainerUseCase _registerTrainerUseCase;
+        private readonly ITrainerService _trainerService;
 
-        public TrainerController(RegisterTrainerUseCase registerTrainerUseCase, TrainerService trainerService)
+        public TrainerController(IRegisterTrainerUseCase registerTrainerUseCase, ITrainerService trainerService)
         {
             _registerTrainerUseCase = registerTrainerUseCase;
             _trainerService = trainerService;

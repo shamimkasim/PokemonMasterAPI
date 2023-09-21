@@ -3,7 +3,7 @@ using PokemonMasterAPI.Domain.Interfaces;
 
 namespace PokemonMasterAPI.Domain.Services
 {
-    public class PokemonService
+    public class PokemonService: IPokemonService
     {
         private readonly IPokemonRepository _pokemonRepository;
 
