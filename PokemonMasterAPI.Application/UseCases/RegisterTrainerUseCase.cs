@@ -1,13 +1,14 @@
 using PokemonMasterAPI.Application.Interfaces;
+using PokemonMasterAPI.Domain.Interfaces;
 using PokemonMasterAPI.Domain.Services;
 
 namespace PokemonMasterAPI.Application.UseCases
 {
     public class RegisterTrainerUseCase: IRegisterTrainerUseCase
     {
-        private readonly TrainerService _trainerService;
+        private readonly ITrainerService _trainerService;
 
-        public RegisterTrainerUseCase(TrainerService trainerService)
+        public RegisterTrainerUseCase(ITrainerService trainerService)
         {
             _trainerService = trainerService;
         }
