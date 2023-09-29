@@ -22,3 +22,37 @@ Save Searched Pokemon: Allows users to save a searched Pokémon by providing a P
 - **Entity Framework Core**: An Object-Relational Mapping (ORM) framework that simplifies data access in the application.
 - **SQLite**: The database system used for storing Pokémon and trainer information.
 - **xUnit**: The testing framework used for unit testing the application.
+
+## Setup and Usage
+
+**Clone the Repository:** Use the following command to clone the repository:
+
+[git clone ](https://github.com/yourusername/PokemonMasterAPI.git)
+
+**Set up the Database**: Ensure you have SQLite installed. Use Entity Framework Core migrations to create the database:
+
+>dotnet ef migrations add InitialMigration
+>
+>dotnet ef database update
+
+**Run the Application**: Start the API by running the following command:
+>dotnet run
+>
+Use the API: Access the API at http://localhost:5000 (or http://localhost:5001 for HTTPS). Use API endpoints like /api/pokemon to interact with the application.
+
+**Tests**
+Unit tests are included in the **PokemonMasterAPITests** project. You can run the tests using the following command:
+
+>dotnet test
+
+Contributions
+Contributions are welcome! If you find a bug or have an enhancement in mind, please open an issue or create a pull request.
+
+License
+This project is licensed under the MIT License.
+
+Acknowledgments
+Special thanks to the creators of the [PokeAPI](http://https://pokeapi.co/ "PokeAPI") for providing the Pokémon data used in this application.
+
+**Author**
+###### **SHAMIM KASIM**
